@@ -106,7 +106,7 @@ starWarsObject.printMoviePoster();
 
 // 4. Address Book
 
-console.log("This is Exercise 1:")
+console.log("This is Exercise 4:")
 
 // Create an object that represents your contact information. Use the code below as an example:
 var sydneyContactInfo = {
@@ -190,24 +190,62 @@ var shoppingCart = {
 
   // The addToCart method should take in a parameter of an object that represents a new item and add it to the shopping cart array. Hint: look up .push()
   addToCart: function(objectToAdd){
-    var cartArray=[];
-    for(i=0; i<objectToAdd.items.length; i++){
-    cartArray.push(objectToAdd.items[i].name);
-    console.log(cartArray)
-    }
-  },
+    this.items.push(objectToAdd);
+    console.log(shoppingCart);
+    //   return shoppingCart;
+    },
+    
+        
+//   },
   // The calculateTotal method should calculate and return a total for all the items in your shopping cart.
   calculateTotal: function(){
-    // YOUR CODE GOES HERE
+      console.log(shoppingCart);
+      
+      totalCost=0;
+      for(i=0;i<this.items.length; i++){
+        totalCost= totalCost + this.items[i].totalPrice;
+        console.log(totalCost);
+        }
+
+    // return totalCost;  
   },
 
   // The printShoppingCart method should loop over all the items in the cart, build up an HTML string that represents the data, and print them to the "#shopping-cart" element in the DOM. You can use any HTML elements you want as long as all of the data is represented.
   printShoppingCart: function(){
-    // YOUR CODE GOES HERE
+    
+    cartHtmlString="";
+    for(i=0;i<this.items.length; i++){
+cartHtmlString=cartHtmlString+
+`<h2>${this.items[i].name}</h2>
+<h3>$${this.items[i].totalPrice}</h2>
+`
+console.log(cartHtmlString);
+    }
+
+    cartHtmlString=`${cartHtmlString} 
+    <p>=========================</>
+    <h2>Total cost =$${totalCost}</h2>`
+document.querySelector("#shopping-cart").innerHTML=cartHtmlString;
   }
 }
 
-shoppingCart.addToCart(shoppingCart);
+var addOranges= {
+    name: "Oranges", 
+    totalPrice: 2.99
+}
+
+var addApples={
+    name: "Apples",
+    totalPrice: 1.75 
+}
+
+shoppingCart.addToCart(addOranges);
+shoppingCart.addToCart(addApples);
+
+shoppingCart.calculateTotal();
+shoppingCart.printShoppingCart();
+
+// shoppingCart.calculateTotal(shoppingCart);
 
 
 
